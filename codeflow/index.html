@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeFlow - Code & Connect</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter & Fira Code -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Custom styles */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .font-mono {
+            font-family: 'Fira Code', monospace;
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.1), transparent 40%), #0f172a;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2), 0 6px 6px rgba(0,0,0,0.2);
+        }
+        .section-padding {
+            padding: 5rem 1.5rem;
+        }
+        @media (min-width: 768px) {
+            .section-padding {
+                padding: 7rem 2rem;
+            }
+        }
+        /* Style for active nav link */
+        .nav-link.active {
+            color: #3b82f6; /* blue-500 */
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-300 antialiased">
+
+    <!-- Header -->
+    <header class="py-5 px-4 sm:px-6 lg:px-8 sticky top-0 left-0 right-0 z-20 bg-slate-900/70 backdrop-blur-lg border-b border-slate-800">
+        <nav class="flex justify-between items-center max-w-7xl mx-auto">
+            <div class="flex items-center space-x-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+                <h1 class="text-2xl font-bold tracking-tight text-white">CodeFlow</h1>
+            </div>
+            <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-400">
+                <a href="#home" class="nav-link hover:text-blue-500 transition-colors">Home</a>
+                <a href="#features" class="nav-link hover:text-blue-500 transition-colors">Features</a>
+                <a href="#connectivity" class="nav-link hover:text-blue-500 transition-colors">Connectivity</a>
+                <a href="#signup" class="nav-link hover:text-blue-500 transition-colors">Mailing List</a>
+            </div>
+            <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-lg transition-colors duration-300 text-sm shadow-lg shadow-blue-500/20">
+                Get App
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Home Page -->
+        <div id="home" class="page">
+            <section class="hero-gradient pt-40 pb-24 text-center">
+                <div class="max-w-4xl mx-auto px-4">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tighter leading-tight">
+                        Code Anywhere. Connect Everywhere.
+                    </h1>
+                    <p class="mt-6 max-w-2xl mx-auto text-lg text-slate-300">
+                        The ultimate code editor for mobile, built for speed and efficiency. With powerful remote connections and an interface that gets out of your way, you can finally be productive on the go.
+                    </p>
+                    <div class="mt-10 flex justify-center items-center gap-4 flex-wrap">
+                        <a href="#" class="bg-white text-slate-900 font-semibold py-3 px-6 rounded-lg shadow-lg hover:bg-slate-200 transition-all duration-300 flex items-center space-x-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z"/><path d="M10 2c1 .5 2 2 2 5"/></svg>
+                            <span>Download on App Store</span>
+                        </a>
+                        <a href="#" class="bg-slate-800/50 text-white font-semibold py-3 px-6 rounded-lg border border-slate-700 hover:bg-slate-700 transition-all duration-300 flex items-center space-x-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21v-4.5L10 12 3 7.5V3l18 9-18 9Z"/></svg>
+                            <span>Get it on Google Play</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Features Page -->
+        <div id="features" class="page hidden">
+            <section class="section-padding bg-slate-950/50">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">A Desktop-Class Editor, Reimagined</h2>
+                        <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-400">We didn't just shrink a desktop editor. We rethought it for touch.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div class="glass-card p-6 rounded-xl text-center">
+                            <div class="bg-blue-600/20 text-blue-400 w-16 h-16 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="keyboard" class="w-8 h-8"></i></div>
+                            <h3 class="mt-5 text-lg font-semibold text-white">Smart Keyboard</h3>
+                            <p class="mt-2 text-slate-400 text-sm leading-relaxed">An extra row of keys gives you quick access to common coding symbols without switching keyboards.</p>
+                        </div>
+                        <div class="glass-card p-6 rounded-xl text-center">
+                            <div class="bg-blue-600/20 text-blue-400 w-16 h-16 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="mouse-pointer-2" class="w-8 h-8"></i></div>
+                            <h3 class="mt-5 text-lg font-semibold text-white">Cursor Navigation Wheel</h3>
+                            <p class="mt-2 text-slate-400 text-sm leading-relaxed">A two-finger tap brings up the navigation wheel, making precise cursor movement and text selection effortless.</p>
+                        </div>
+                        <div class="glass-card p-6 rounded-xl text-center">
+                            <div class="bg-blue-600/20 text-blue-400 w-16 h-16 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="code-2" class="w-8 h-8"></i></div>
+                            <h3 class="mt-5 text-lg font-semibold text-white">Code Completion</h3>
+                            <p class="mt-2 text-slate-400 text-sm leading-relaxed">Smart suggestions appear as you type, dramatically speeding up your workflow in any language.</p>
+                        </div>
+                        <div class="glass-card p-6 rounded-xl text-center">
+                            <div class="bg-blue-600/20 text-blue-400 w-16 h-16 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="command" class="w-8 h-8"></i></div>
+                            <h3 class="mt-5 text-lg font-semibold text-white">Full Keyboard Support</h3>
+                            <p class="mt-2 text-slate-400 text-sm leading-relaxed">Connect a hardware keyboard and use all your favorite shortcuts for a true pro-level experience.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Connectivity Page -->
+        <div id="connectivity" class="page hidden">
+            <section class="section-padding">
+                <div class="max-w-7xl mx-auto">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                        <div>
+                            <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">Seamlessly Connected</h2>
+                            <p class="mt-4 text-lg text-slate-400">Access your files and servers from anywhere. CodeFlow integrates with the tools you already use.</p>
+                            <ul class="mt-8 space-y-6">
+                                <li class="flex items-start"><i data-lucide="server" class="w-8 h-8 text-blue-500 mr-5 mt-1 flex-shrink-0"></i><div><h4 class="font-semibold text-white text-lg">FTP, SFTP, & WebDAV</h4><p class="text-slate-400 leading-relaxed">Connect to your remote servers to edit files directly. No need to download and re-upload.</p></div></li>
+                                <li class="flex items-start"><i data-lucide="cloud" class="w-8 h-8 text-blue-500 mr-5 mt-1 flex-shrink-0"></i><div><h4 class="font-semibold text-white text-lg">Cloud Integration</h4><p class="text-slate-400 leading-relaxed">Link your Dropbox account to access and sync your projects across all your devices.</p></div></li>
+                                <li class="flex items-start"><i data-lucide="hard-drive" class="w-8 h-8 text-blue-500 mr-5 mt-1 flex-shrink-0"></i><div><h4 class="font-semibold text-white text-lg">Built-in WebDAV Server</h4><p class="text-slate-400 leading-relaxed">Easily transfer files from your Mac or PC directly to CodeFlow over your local network.</p></div></li>
+                            </ul>
+                        </div>
+                        <div class="glass-card rounded-2xl p-8 lg:p-12">
+                            <div class="bg-green-600/20 text-green-400 w-16 h-16 rounded-xl flex items-center justify-center"><i data-lucide="terminal-square" class="w-8 h-8"></i></div>
+                            <h3 class="mt-6 text-2xl font-bold text-white">Built-in SSH Terminal</h3>
+                            <p class="mt-2 text-slate-400 leading-relaxed">Need to run a command on your server? Open a full-featured SSH terminal right inside the app.</p>
+                            <div class="mt-6 p-4 bg-black/70 rounded-md font-mono text-xs border border-slate-700">
+                                <p class="text-green-400 flex items-center">
+                                    <span class="text-cyan-400">user@prod-server</span><span class="text-slate-500">:</span><span class="text-purple-400">~/app</span><span class="text-slate-500">$</span>
+                                    <span class="text-slate-300 ml-2">npm install</span>
+                                </p>
+                                <p class="text-slate-400 mt-2">up to date, audited 150 packages in 2s</p>
+                                <p class="flex items-center mt-2">
+                                    <span class="text-cyan-400">user@prod-server</span><span class="text-slate-500">:</span><span class="text-purple-400">~/app</span><span class="text-slate-500">$</span>
+                                    <span class="ml-2 animate-pulse bg-green-400 w-2 h-4 inline-block"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Mailing List Signup Page -->
+        <div id="signup" class="page hidden">
+            <section class="section-padding">
+                <div class="max-w-xl mx-auto text-center">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">Stay Updated</h2>
+                    <p class="mt-4 text-lg text-slate-400">Join our mailing list to get the latest news, updates, and special offers for CodeFlow.</p>
+                    <form id="signup-form" class="mt-10 flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                        <input type="email" id="email-input" placeholder="Enter your email" required class="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none placeholder-slate-500">
+                        <button type="submit" id="signup-button" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 shadow-lg shadow-blue-500/20 flex-shrink-0">
+                            Sign Up
+                        </button>
+                    </form>
+                    <div id="form-message" class="mt-4 text-sm"></div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950/50 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-slate-400">&copy; 2025 CodeFlow. All rights reserved.</p>
+            <p class="text-sm mt-2 text-slate-500">Designed for developers, by developers.</p>
+        </div>
+    </footer>
+
+    <!-- Firebase and Page Navigation Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // --- Single-Page App Navigation ---
+        // This site feels like a multi-page app, but it's actually one HTML file!
+        // The code below handles showing and hiding the different sections ("pages").
+        const pages = document.querySelectorAll('.page');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        // This function is the heart of our navigation. It takes a hash (like #features)
+        // and makes the corresponding page visible.
+        function showPage(hash) {
+            // If there's no hash, we'll just default to the home page.
+            const targetId = (hash && hash.length > 1) ? hash.substring(1) : 'home';
+            
+            // Loop through all our "pages" and hide the ones that aren't our target.
+            pages.forEach(page => {
+                page.classList.toggle('hidden', page.id !== targetId);
+            });
+            
+            // Update the navigation links to show which page is currently active.
+            navLinks.forEach(link => {
+                const linkHash = link.hash || '#home';
+                const currentHash = hash || '#home';
+                link.classList.toggle('active', linkHash === currentHash);
+            });
+
+            // Scroll to the top of the page on navigation so it feels like a new page loaded.
+            window.scrollTo(0, 0);
+        }
+
+        // Now, let's listen for clicks on our navigation links.
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                // Stop the browser from doing its default jump-to-anchor behavior.
+                e.preventDefault();
+                const hash = e.currentTarget.hash;
+                
+                // We're not using the browser's history API (like pushState) because it can cause
+                // security errors in some sandboxed environments (like this one!). We'll just
+                // manage the page view ourselves.
+                showPage(hash);
+            });
+        });
+
+        // When the page first loads, make sure the home page is visible.
+        showPage('#home');
+        
+        // --- Firebase & Mailing List Backend ---
+        // Here's where we connect to our backend to handle the mailing list signups.
+        // We're using Firestore, which is a great NoSQL database from Google.
+        let db; // We'll store our database connection here.
+
+        try {
+            // The firebaseConfig and initial_auth_token are provided by the environment.
+            // We wrap this in a try...catch block just in case something goes wrong during setup.
+            const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+            db = getFirestore(app);
+            
+            // To write to our database, we need to be authenticated.
+            // The environment might provide a token for a specific user. If not, we'll
+            // just sign in as an anonymous user. It's a simple way to get the permissions we need.
+            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+              await signInWithCustomToken(auth, __initial_auth_token);
+            } else {
+              await signInAnonymously(auth);
+            }
+        } catch (error) {
+            console.error("Firebase initialization failed. Mailing list will be disabled.", error);
+            // If we can't connect to Firebase, we should let the user know and disable the form.
+            document.getElementById('signup-button').disabled = true;
+            document.getElementById('email-input').disabled = true;
+            document.getElementById('form-message').textContent = 'Mailing list is currently unavailable.';
+            document.getElementById('form-message').className = 'mt-4 text-sm text-red-400';
+        }
+
+        // Grab the form elements from the page.
+        const signupForm = document.getElementById('signup-form');
+        const emailInput = document.getElementById('email-input');
+        const formMessage = document.getElementById('form-message');
+        const signupButton = document.getElementById('signup-button');
+
+        // Listen for when the user submits the form.
+        signupForm.addEventListener('submit', async (e) => {
+            // Prevent the form from reloading the page.
+            e.preventDefault();
+            if (!db) {
+                formMessage.textContent = 'Error: Database connection not available.';
+                formMessage.className = 'mt-4 text-sm text-red-400';
+                return;
+            }
+
+            const email = emailInput.value;
+            // Give the user some visual feedback that we're working on it.
+            signupButton.disabled = true;
+            signupButton.textContent = 'Signing up...';
+            formMessage.textContent = '';
+
+            try {
+                // The appId is also provided by the environment. We use it to make sure
+                // data for this app is stored in the right place.
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                // This is the path to our mailing list collection in Firestore.
+                const mailingListCollection = collection(db, `/artifacts/${appId}/public/data/mailing_list`);
+                
+                // And here's the magic! We add a new document to the collection.
+                await addDoc(mailingListCollection, {
+                    email: email,
+                    signedUpAt: serverTimestamp() // It's good practice to store a timestamp.
+                });
+
+                // Let the user know it worked!
+                formMessage.className = 'mt-4 text-sm text-green-400';
+                formMessage.textContent = "Success! Thanks for signing up. We'll be in touch.";
+                emailInput.value = '';
+
+            } catch (error) {
+                // Uh oh, something went wrong. Let the user know.
+                console.error("Error adding document to Firestore: ", error);
+                formMessage.className = 'mt-4 text-sm text-red-400';
+                formMessage.textContent = 'Something went wrong on our end. Please try again later.';
+            } finally {
+                // Whether it succeeded or failed, re-enable the button.
+                signupButton.disabled = false;
+                signupButton.textContent = 'Sign Up';
+            }
+        });
+
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
