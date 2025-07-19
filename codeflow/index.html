@@ -29,8 +29,8 @@
         }
         .glass-card {
             background: rgba(30, 41, 59, 0.5);
-            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(51, 65, 85, 0.5);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -189,102 +189,125 @@
     <!-- Footer -->
     <footer class="bg-slate-950/50 border-t border-slate-800">
         <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 text-center">
-            <p class="text-slate-400">&copy; 2025 CodeFlow. All rights reserved.</p>
-            <p class="text-sm mt-2 text-slate-500">Designed for developers, by developers.</p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 text-slate-400">
+                 <p>&copy; 2025 CodeFlow. All rights reserved.</p>
+                 <a href="YOUR_PORTFOLIO_URL_HERE" class="hover:text-blue-500 transition-colors sm:border-l sm:border-slate-700 sm:pl-6">Back to Portfolio</a>
+            </div>
+            <p class="text-sm mt-4 text-slate-500">Designed for developers, by developers.</p>
         </div>
     </footer>
 
     <!-- Firebase and Page Navigation Script -->
     <script type="module">
+        // These first lines import the specific tools we need from the Firebase library.
+        // Think of it like grabbing the right tools from a toolbox before starting a project.
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // --- Single-Page App Navigation ---
-        // This site feels like a multi-page app, but it's actually one HTML file!
-        // The code below handles showing and hiding the different sections ("pages").
+        // This website looks like it has multiple pages, but it's all one HTML file.
+        // This section of the script handles the logic to show and hide different content areas
+        // to create that multi-page feeling without reloading everything.
+
+        // First, we grab all the elements that act as our "pages" and our navigation links.
         const pages = document.querySelectorAll('.page');
         const navLinks = document.querySelectorAll('.nav-link');
 
-        // This function is the heart of our navigation. It takes a hash (like #features)
-        // and makes the corresponding page visible.
+        // This is our main function for switching between pages.
+        // It takes a "hash" (the part of a URL that starts with #, like #features)
+        // and shows the page with the matching ID.
         function showPage(hash) {
-            // If there's no hash, we'll just default to the home page.
+            // If the URL has no hash, we'll default to showing the 'home' page.
             const targetId = (hash && hash.length > 1) ? hash.substring(1) : 'home';
             
-            // Loop through all our "pages" and hide the ones that aren't our target.
+            // Now, we'll go through each of our page sections.
             pages.forEach(page => {
+                // We use a handy trick here: `toggle` will add the 'hidden' class if the page is NOT our target,
+                // and remove it if it IS our target. This is a clean way to show one page and hide all the others.
                 page.classList.toggle('hidden', page.id !== targetId);
             });
             
-            // Update the navigation links to show which page is currently active.
+            // We also want to highlight the correct link in the navigation bar.
             navLinks.forEach(link => {
                 const linkHash = link.hash || '#home';
                 const currentHash = hash || '#home';
+                // This does the same thing as above, but adds or removes an 'active' class for styling.
                 link.classList.toggle('active', linkHash === currentHash);
             });
 
-            // Scroll to the top of the page on navigation so it feels like a new page loaded.
+            // Finally, whenever we switch pages, we scroll the user to the top.
+            // This makes it feel like a fresh page has loaded.
             window.scrollTo(0, 0);
         }
 
-        // Now, let's listen for clicks on our navigation links.
+        // We need to make our navigation links do something when clicked.
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
-                // Stop the browser from doing its default jump-to-anchor behavior.
+                // First, we stop the browser's default behavior of jumping to the link's anchor.
+                // We want to handle the page switch smoothly ourselves.
                 e.preventDefault();
                 const hash = e.currentTarget.hash;
                 
-                // We're not using the browser's history API (like pushState) because it can cause
-                // security errors in some sandboxed environments (like this one!). We'll just
-                // manage the page view ourselves.
+                // We just call our showPage function. We are not changing the browser's history
+                // because it can cause security errors in some restricted environments (like this one).
                 showPage(hash);
             });
         });
 
-        // When the page first loads, make sure the home page is visible.
+        // When the website first loads, we need to make sure the correct page is showing.
+        // We'll just show the home page by default.
         showPage('#home');
         
         // --- Firebase & Mailing List Backend ---
-        // Here's where we connect to our backend to handle the mailing list signups.
-        // We're using Firestore, which is a great NoSQL database from Google.
-        let db; // We'll store our database connection here.
+        // This is where we connect to our backend database (Firestore) to handle mailing list signups.
+        
+        // We'll declare our database variable here so it's accessible everywhere in this script.
+        let db;
 
+        // It's always a good idea to wrap database connections in a 'try...catch' block.
+        // If something goes wrong (like a network error), the website won't crash.
         try {
-            // The firebaseConfig and initial_auth_token are provided by the environment.
-            // We wrap this in a try...catch block just in case something goes wrong during setup.
+            // These special variables (__firebase_config, __initial_auth_token, __app_id) are
+            // provided by the hosting environment. They contain all the secret keys and settings
+            // needed to securely connect to our specific Firebase project.
             const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
             const app = initializeApp(firebaseConfig);
             const auth = getAuth(app);
             db = getFirestore(app);
             
-            // To write to our database, we need to be authenticated.
-            // The environment might provide a token for a specific user. If not, we'll
-            // just sign in as an anonymous user. It's a simple way to get the permissions we need.
+            // To write data to our database, we need to be logged in.
+            // This code checks if a specific user token is available. If it is, we use it.
+            // If not, we simply sign in as a "guest" or anonymous user. This is a simple
+            // and secure way to get the permissions we need to add an email to the list.
             if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
               await signInWithCustomToken(auth, __initial_auth_token);
             } else {
               await signInAnonymously(auth);
             }
         } catch (error) {
+            // If the 'try' block fails, this 'catch' block will run.
             console.error("Firebase initialization failed. Mailing list will be disabled.", error);
-            // If we can't connect to Firebase, we should let the user know and disable the form.
+            
+            // We should let the user know that the signup form isn't working.
             document.getElementById('signup-button').disabled = true;
             document.getElementById('email-input').disabled = true;
             document.getElementById('form-message').textContent = 'Mailing list is currently unavailable.';
             document.getElementById('form-message').className = 'mt-4 text-sm text-red-400';
         }
 
-        // Grab the form elements from the page.
+        // Let's get the HTML elements for our form so we can work with them in JavaScript.
         const signupForm = document.getElementById('signup-form');
         const emailInput = document.getElementById('email-input');
         const formMessage = document.getElementById('form-message');
         const signupButton = document.getElementById('signup-button');
 
-        // Listen for when the user submits the form.
+        // This code runs when the user clicks the "Sign Up" button.
         signupForm.addEventListener('submit', async (e) => {
-            // Prevent the form from reloading the page.
+            // Stop the form from doing a full page reload, which is the default browser behavior.
             e.preventDefault();
+            
+            // A quick safety check. If the database connection failed earlier, don't proceed.
             if (!db) {
                 formMessage.textContent = 'Error: Database connection not available.';
                 formMessage.className = 'mt-4 text-sm text-red-400';
@@ -292,42 +315,46 @@
             }
 
             const email = emailInput.value;
-            // Give the user some visual feedback that we're working on it.
+            // It's good practice to give the user visual feedback. We'll disable the button
+            // and change its text to show that something is happening.
             signupButton.disabled = true;
             signupButton.textContent = 'Signing up...';
             formMessage.textContent = '';
 
             try {
-                // The appId is also provided by the environment. We use it to make sure
-                // data for this app is stored in the right place.
+                // This is the path in our database where we'll store the emails.
+                // Using the app ID makes sure that data from different apps doesn't get mixed up.
                 const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-                // This is the path to our mailing list collection in Firestore.
                 const mailingListCollection = collection(db, `/artifacts/${appId}/public/data/mailing_list`);
                 
-                // And here's the magic! We add a new document to the collection.
+                // This is the core action: we add a new "document" (like a row in a spreadsheet)
+                // to our mailing list collection. The document contains the user's email and a timestamp.
                 await addDoc(mailingListCollection, {
                     email: email,
-                    signedUpAt: serverTimestamp() // It's good practice to store a timestamp.
+                    signedUpAt: serverTimestamp() // Storing a timestamp is great for sorting and tracking.
                 });
 
-                // Let the user know it worked!
+                // Success! Let the user know everything worked.
                 formMessage.className = 'mt-4 text-sm text-green-400';
                 formMessage.textContent = "Success! Thanks for signing up. We'll be in touch.";
-                emailInput.value = '';
+                emailInput.value = ''; // Clear the input field.
 
             } catch (error) {
-                // Uh oh, something went wrong. Let the user know.
+                // If the `try` block failed, we land here.
                 console.error("Error adding document to Firestore: ", error);
+                // Let the user know that something went wrong on our end.
                 formMessage.className = 'mt-4 text-sm text-red-400';
                 formMessage.textContent = 'Something went wrong on our end. Please try again later.';
             } finally {
-                // Whether it succeeded or failed, re-enable the button.
+                // The `finally` block runs regardless of whether the `try` or `catch` block executed.
+                // This is the perfect place to re-enable the button for the user.
                 signupButton.disabled = false;
                 signupButton.textContent = 'Sign Up';
             }
         });
 
-        // Initialize Lucide icons
+        // This final line runs the Lucide Icons library, which finds all the icon placeholders
+        // in our HTML and replaces them with the actual SVG icon images.
         lucide.createIcons();
     </script>
 </body>
